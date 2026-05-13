@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliminación de cuenta — Mikefero App</title>
+  <style>
+    :root {
+      --bg:      #0a0a14;
+      --surface: #12121f;
+      --border:  #1e1e35;
+      --accent:  #00e5ff;
+      --text:    #e0e0f0;
+      --muted:   #8888aa;
+      --danger:  #ff4444;
+      --green:   #4caf50;
+      --radius:  12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px 20px;
+      text-align: center;
+    }
+
+    header .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    header .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    main {
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .page-meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: 700;
+      margin: 32px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.5px;
+    }
+
+    p { margin-bottom: 12px; }
+
+    /* Steps */
+    .steps { margin: 16px 0 24px; display: flex; flex-direction: column; gap: 14px; }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+
+    .step-num {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-body strong { color: var(--text); display: block; margin-bottom: 4px; }
+    .step-body p { color: var(--muted); font-size: 14px; margin: 0; }
+
+    /* Data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--border);
+      color: var(--accent);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .tag-deleted  { background: #0d1a0d; color: var(--green);  border: 1px solid var(--green); }
+    .tag-retained { background: #1a0d0d; color: var(--danger); border: 1px solid var(--danger); }
+
+    /* Email CTA */
+    .cta-box {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .cta-box .cta-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+    }
+
+    .cta-btn:hover { opacity: 0.85; }
+
+    .cta-box .cta-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .highlight {
+      background: #0d1a1f;
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+
+    @media (max-width: 600px) {
+      .data-table th, .data-table td { padding: 8px 10px; font-size: 13px; }
+      h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Mikefero App</div>
+  <div class="subtitle">Eliminación de cuenta &nbsp;/&nbsp; Account Deletion</div>
+</header>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('es')">Español</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+</div>
+
+<main>
+
+  <!-- ═══════════════════════════ ESPAÑOL ═══════════════════════════ -->
+  <div data-lang="es" class="visible">
+
+    <a class="back-link" href="index.html">← Política de Privacidad</a>
+
+    <h1>Solicitar eliminación de cuenta</h1>
+    <p class="page-meta">Mikefero App &nbsp;·&nbsp; com.mikefero.defiance &nbsp;·&nbsp; Última actualización: 12 de mayo de 2026</p>
+
+    <p>
+      Puedes solicitar la eliminación completa de tu cuenta y todos los datos asociados en cualquier
+      momento, sin necesidad de justificación. El proceso es sencillo y gratuito.
+    </p>
+
+    <h2>Cómo solicitar la eliminación</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Envía un correo a nuestra dirección de soporte</strong>
+          <p>Usa el botón de abajo o escribe directamente a <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Incluye los siguientes datos en el correo</strong>
+          <p>
+            • Asunto: <em>"Solicitud de eliminación de cuenta"</em><br>
+            • El correo electrónico con el que te registraste en la App<br>
+            • Tu nombre de usuario en la App (si lo recuerdas)
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Confirmación y procesamiento</strong>
+          <p>
+            Recibirás una confirmación en un plazo de <strong>72 horas</strong>. La eliminación
+            completa de tus datos se completará en un máximo de <strong>30 días</strong> desde
+            la recepción de tu solicitud.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <p class="cta-label">Pulsa el botón para abrir tu app de correo con el asunto ya rellenado</p>
+      <a class="cta-btn"
+         href="mailto:mike3jrt@gmail.com?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta&body=Hola%2C%20solicito%20la%20eliminaci%C3%B3n%20de%20mi%20cuenta%20y%20todos%20los%20datos%20asociados.%0A%0ACorreo%20registrado%3A%20%0ANombre%20de%20usuario%3A%20">
+        Solicitar eliminación por correo
+      </a>
+      <p class="cta-note">O escribe directamente a <strong>mike3jrt@gmail.com</strong></p>
+    </div>
+
+    <h2>Qué datos se eliminan</h2>
+    <p>
+      Al procesar tu solicitud, eliminamos de forma permanente e irrecuperable los siguientes datos:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dato</th>
+          <th>Ubicación</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cuenta de autenticación (email + contraseña)</td>
+          <td>Firebase Authentication</td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Perfil de usuario (nombre de usuario, email almacenado)</td>
+          <td>Firebase Database · <code>users/{uid}</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Reserva de nombre de usuario</td>
+          <td>Firebase Database · <code>usernames/{nombre}</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Ítems del juego almacenados</td>
+          <td>Firebase Database · <code>items/{uid}</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Ítems publicados en la tienda</td>
+          <td>Firebase Database · <code>store/{uid}</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Historial de chats (como comprador o vendedor)</td>
+          <td>Firebase Database · <code>chats/</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Registro del dispositivo</td>
+          <td>Firebase Database · <code>devices/{deviceId}</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+        <tr>
+          <td>Token de notificaciones push</td>
+          <td>Firebase Database · <code>notifications/{uid}</code></td>
+          <td><span class="tag tag-deleted">Eliminado</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Datos que podrían conservarse temporalmente</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dato</th>
+          <th>Motivo de retención</th>
+          <th>Período</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Registros internos de Firebase (logs de acceso)</td>
+          <td>Gestionados por Google según su política; fuera de nuestro control directo</td>
+          <td>Hasta 180 días (política de Google)</td>
+        </tr>
+        <tr>
+          <td>Mensajes en chats donde la otra parte aún los tenga activos</td>
+          <td>El otro participante debe cerrar el chat para eliminar el hilo completo</td>
+          <td>Hasta que el otro participante cierre el chat</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <strong>Nota:</strong> Una vez eliminada la cuenta, el nombre de usuario queda liberado y puede
+      ser registrado por otro usuario. La eliminación es permanente e irreversible; no es posible
+      recuperar la cuenta ni los datos una vez procesada la solicitud.
+    </div>
+
+    <h2>¿Tienes preguntas?</h2>
+    <p>
+      Si tienes dudas sobre el proceso de eliminación o sobre qué datos tenemos almacenados,
+      escríbenos a <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a>.
+      También puedes consultar nuestra <a href="index.html">Política de Privacidad completa</a>.
+    </p>
+
+  </div><!-- /es -->
+
+
+  <!-- ═══════════════════════════ ENGLISH ═══════════════════════════ -->
+  <div data-lang="en">
+
+    <a class="back-link" href="index.html">← Privacy Policy</a>
+
+    <h1>Request account deletion</h1>
+    <p class="page-meta">Mikefero App &nbsp;·&nbsp; com.mikefero.defiance &nbsp;·&nbsp; Last updated: May 12, 2026</p>
+
+    <p>
+      You may request the complete deletion of your account and all associated data at any time,
+      with no justification required. The process is simple and free of charge.
+    </p>
+
+    <h2>How to request deletion</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Send an email to our support address</strong>
+          <p>Use the button below or write directly to <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Include the following in your email</strong>
+          <p>
+            • Subject: <em>"Account deletion request"</em><br>
+            • The email address you used to register in the App<br>
+            • Your in-app username (if you remember it)
+          </p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Confirmation and processing</strong>
+          <p>
+            You will receive a confirmation within <strong>72 hours</strong>. The complete deletion
+            of your data will be completed within a maximum of <strong>30 days</strong> from receipt
+            of your request.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <p class="cta-label">Tap the button to open your email app with the subject pre-filled</p>
+      <a class="cta-btn"
+         href="mailto:mike3jrt@gmail.com?subject=Account%20deletion%20request&body=Hello%2C%20I%20am%20requesting%20the%20deletion%20of%20my%20account%20and%20all%20associated%20data.%0A%0ARegistered%20email%3A%20%0AUsername%3A%20">
+        Request deletion by email
+      </a>
+      <p class="cta-note">Or write directly to <strong>mike3jrt@gmail.com</strong></p>
+    </div>
+
+    <h2>What data is deleted</h2>
+    <p>
+      When processing your request, we permanently and irreversibly delete the following data:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Location</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Authentication account (email + password)</td>
+          <td>Firebase Authentication</td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>User profile (username, stored email)</td>
+          <td>Firebase Database · <code>users/{uid}</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>Username reservation</td>
+          <td>Firebase Database · <code>usernames/{name}</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>Stored game items</td>
+          <td>Firebase Database · <code>items/{uid}</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>Items published in the store</td>
+          <td>Firebase Database · <code>store/{uid}</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>Chat history (as buyer or seller)</td>
+          <td>Firebase Database · <code>chats/</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>Device registration</td>
+          <td>Firebase Database · <code>devices/{deviceId}</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+        <tr>
+          <td>Push notification token</td>
+          <td>Firebase Database · <code>notifications/{uid}</code></td>
+          <td><span class="tag tag-deleted">Deleted</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Data that may be temporarily retained</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Reason for retention</th>
+          <th>Period</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Firebase internal logs (access logs)</td>
+          <td>Managed by Google per their policy; outside our direct control</td>
+          <td>Up to 180 days (Google policy)</td>
+        </tr>
+        <tr>
+          <td>Messages in chats where the other party still has them active</td>
+          <td>The other participant must close the chat to fully remove the thread</td>
+          <td>Until the other participant closes the chat</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <strong>Note:</strong> Once the account is deleted, the username is released and may be
+      registered by another user. Deletion is permanent and irreversible; it is not possible to
+      recover the account or data once the request has been processed.
+    </div>
+
+    <h2>Have questions?</h2>
+    <p>
+      If you have questions about the deletion process or about what data we have stored,
+      write to us at <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a>.
+      You can also read our <a href="index.html">full Privacy Policy</a>.
+    </p>
+
+  </div><!-- /en -->
+
+</main>
+
+<footer>
+  <p>© 2026 Mikefero App &nbsp;·&nbsp; com.mikefero.defiance &nbsp;·&nbsp; <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a></p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('visible', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().startsWith(lang === 'es' ? 'es' : 'en'));
+    });
+  }
+</script>
+
+</body>
+</html>
