@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — Mikefero App</title>
+  <style>
+    :root {
+      --bg:       #0a0a14;
+      --surface:  #12121f;
+      --border:   #1e1e35;
+      --accent:   #00e5ff;
+      --accent2:  #0077b6;
+      --text:     #e0e0f0;
+      --muted:    #8888aa;
+      --danger:   #ff4444;
+      --radius:   12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px 20px;
+      text-align: center;
+    }
+
+    header .logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    header .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    /* Language toggle */
+    .lang-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 6px 18px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    /* Content */
+    main {
+      max-width: 760px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    .policy-meta {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .policy-meta span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .policy-meta strong {
+      color: var(--accent);
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 700;
+      margin: 36px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.5px;
+    }
+
+    h2:first-of-type { margin-top: 0; }
+
+    p { margin-bottom: 12px; color: var(--text); }
+
+    ul {
+      list-style: none;
+      margin: 8px 0 16px 0;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+      color: var(--text);
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+      top: 8px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin: 16px 0;
+    }
+
+    .card-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-collected  { background: #1a2a2a; color: var(--accent); border: 1px solid var(--accent); }
+    .badge-not        { background: #1a1a2a; color: var(--muted);  border: 1px solid var(--border); }
+    .badge-shared     { background: #1a1520; color: #bb88ff;        border: 1px solid #bb88ff; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--border);
+      color: var(--accent);
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .highlight {
+      background: #0d1a1f;
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+    }
+
+    .highlight.warning {
+      background: #1a0d0d;
+      border-left-color: var(--danger);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Language sections */
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+
+    @media (max-width: 600px) {
+      .data-table th, .data-table td { padding: 8px 10px; font-size: 13px; }
+      h2 { font-size: 16px; }
+      .policy-meta { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Mikefero App</div>
+  <div class="subtitle">Política de Privacidad &nbsp;/&nbsp; Privacy Policy</div>
+</header>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('es')">Español</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+</div>
+
+<main>
+
+  <!-- ═══════════════════════════════ ESPAÑOL ═══════════════════════════════ -->
+  <div data-lang="es" class="visible">
+
+    <div class="policy-meta">
+      <span><strong>Aplicación:</strong> Mikefero App</span>
+      <span><strong>Paquete:</strong> com.mikefero.defiance</span>
+      <span><strong>Última actualización:</strong> 12 de mayo de 2026</span>
+      <span><strong>Contacto:</strong> <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a></span>
+    </div>
+
+    <h2>1. Introducción</h2>
+    <p>
+      Bienvenido a <strong>Mikefero App</strong> ("la App", "nosotros"). Esta Política de Privacidad
+      describe qué información recopilamos, cómo la usamos, cómo la protegemos y cuáles son tus
+      derechos como usuario. Al registrarte y usar la App, aceptas las prácticas descritas en este
+      documento.
+    </p>
+    <p>
+      La App es una herramienta de gestión e intercambio de objetos del videojuego <em>DEFIANCE</em>.
+      No estamos afiliados al desarrollador del videojuego.
+    </p>
+
+    <h2>2. Datos que recopilamos</h2>
+
+    <div class="card">
+      <div class="card-title">Datos que SÍ recopilamos</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Por qué lo recopilamos</th>
+            <th>¿Es visible para otros usuarios?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Correo electrónico</strong><br/><span style="color:var(--muted);font-size:12px">Solo @gmail.com</span></td>
+            <td>Autenticación y recuperación de cuenta</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Nombre de usuario</strong></td>
+            <td>Identificarte dentro de la App</td>
+            <td>Sí — aparece en la tienda y chats</td>
+          </tr>
+          <tr>
+            <td><strong>Identificador de dispositivo</strong><br/><span style="color:var(--muted);font-size:12px">ANDROID_ID</span></td>
+            <td>Limitar un registro por dispositivo y prevenir cuentas múltiples fraudulentas</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Token de notificación</strong><br/><span style="color:var(--muted);font-size:12px">FCM Token</span></td>
+            <td>Enviarte notificaciones push (rifas, mensajes, alertas)</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Mensajes de chat</strong></td>
+            <td>Facilitar la comunicación entre compradores y vendedores</td>
+            <td>Solo entre los participantes del chat</td>
+          </tr>
+          <tr>
+            <td><strong>Datos de ítems del juego</strong><br/><span style="color:var(--muted);font-size:12px">Armas, estadísticas, mods</span></td>
+            <td>Funcionalidad principal de la App (gestión y tienda)</td>
+            <td>Sí — cuando publicas un ítem en la tienda</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Datos que NO recopilamos</div>
+      <ul>
+        <li>Ubicación geográfica o GPS</li>
+        <li>Imágenes, video o audio del dispositivo</li>
+        <li>Datos biométricos</li>
+        <li>Datos bancarios o de pago</li>
+        <li>Contactos del dispositivo</li>
+        <li>Historial de navegación o de otras aplicaciones</li>
+      </ul>
+    </div>
+
+    <h2>3. Cómo usamos tus datos</h2>
+    <ul>
+      <li>Crear y gestionar tu cuenta de usuario</li>
+      <li>Garantizar que cada dispositivo tenga como máximo una cuenta (seguridad anti-fraude)</li>
+      <li>Mostrar tu nombre de usuario en la tienda y en los chats</li>
+      <li>Permitirte publicar ítems y contactar a otros usuarios para intercambios</li>
+      <li>Enviarte notificaciones relacionadas con la App (rifas, mensajes, actualizaciones)</li>
+      <li>Administrar el acceso y aplicar restricciones de moderación si fuera necesario</li>
+    </ul>
+    <p>
+      No usamos tus datos para publicidad, perfilado comercial ni los vendemos a terceros bajo ninguna circunstancia.
+    </p>
+
+    <h2>4. Servicios de terceros</h2>
+    <p>
+      La App utiliza los siguientes servicios de <strong>Google / Firebase</strong>, cada uno con su
+      propia política de privacidad:
+    </p>
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr><th>Servicio</th><th>Uso</th><th>Política de privacidad</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Firebase Authentication</strong></td>
+            <td>Registro e inicio de sesión</td>
+            <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+          </tr>
+          <tr>
+            <td><strong>Firebase Realtime Database</strong></td>
+            <td>Almacenamiento de ítems, perfiles y chats</td>
+            <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+          </tr>
+          <tr>
+            <td><strong>Firebase Cloud Messaging</strong></td>
+            <td>Notificaciones push</td>
+            <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Todos estos servicios son operados por Google LLC y se rigen por la
+      <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidad de Google</a>.
+      Los datos se almacenan en servidores de Google.
+    </p>
+
+    <h2>5. Compartición de datos</h2>
+    <p>No compartimos tus datos personales con terceros excepto en los siguientes casos:</p>
+    <ul>
+      <li><strong>Google / Firebase</strong> — como proveedor de infraestructura (detallado en la sección 4)</li>
+      <li><strong>Otros usuarios de la App</strong> — únicamente tu nombre de usuario y los ítems que publiques voluntariamente en la tienda</li>
+      <li><strong>Obligaciones legales</strong> — si una autoridad competente lo requiriera conforme a la ley aplicable</li>
+    </ul>
+
+    <h2>6. Retención de datos</h2>
+    <p>
+      Conservamos tus datos mientras tu cuenta esté activa. Si solicitas la eliminación de tu cuenta,
+      borraremos tu información de Firebase en un plazo razonable, excepto cuando la ley obligue a
+      conservarla por un período determinado.
+    </p>
+    <p>
+      Los mensajes de chat se eliminan cuando cualquiera de los participantes cierra el chat dentro de la App.
+    </p>
+
+    <h2>7. Seguridad</h2>
+    <p>
+      Implementamos medidas técnicas para proteger tus datos:
+    </p>
+    <ul>
+      <li>Autenticación por correo con verificación de cuenta obligatoria antes del primer acceso</li>
+      <li>Reglas de seguridad en Firebase Realtime Database que limitan el acceso a cada recurso a su propietario</li>
+      <li>Verificación de integridad del APK en builds de producción</li>
+      <li>Control de versiones mínimas para forzar actualizaciones de seguridad</li>
+      <li>Comunicaciones cifradas mediante HTTPS/TLS gestionadas por Firebase</li>
+    </ul>
+    <p>
+      No obstante, ningún sistema es 100% seguro. Te recomendamos usar una contraseña robusta y no
+      compartir tus credenciales.
+    </p>
+
+    <h2>8. Permisos de la aplicación</h2>
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr><th>Permiso</th><th>Motivo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>INTERNET</code></td>
+            <td>Conexión con Firebase para sincronizar datos</td>
+          </tr>
+          <tr>
+            <td><code>ACCESS_NETWORK_STATE</code></td>
+            <td>Detectar el estado de la conexión y bloquear el uso sin internet</td>
+          </tr>
+          <tr>
+            <td><code>POST_NOTIFICATIONS</code></td>
+            <td>Mostrar notificaciones push en Android 13 o superior</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>La App <strong>no solicita</strong> acceso a la cámara, micrófono, ubicación, contactos ni almacenamiento.</p>
+
+    <h2>9. Menores de edad</h2>
+    <div class="highlight warning">
+      <p>
+        <strong>La App está dirigida a usuarios mayores de 13 años.</strong> No recopilamos
+        intencionalmente datos personales de niños menores de 13 años. Si eres padre o tutor y crees
+        que tu hijo ha creado una cuenta, contáctanos en
+        <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a> para eliminar la cuenta y sus datos
+        de inmediato.
+      </p>
+    </div>
+    <p>
+      Para usuarios de entre 13 y 17 años, recomendamos que un adulto revise esta política antes de
+      crear una cuenta. El proceso de registro requiere una cuenta de correo <em>@gmail.com</em> activa.
+    </p>
+
+    <h2>10. Tus derechos</h2>
+    <p>Dependiendo de tu jurisdicción, puedes tener derecho a:</p>
+    <ul>
+      <li><strong>Acceso</strong> — solicitar una copia de los datos que tenemos sobre ti</li>
+      <li><strong>Rectificación</strong> — corregir tu nombre de usuario desde el perfil de la App</li>
+      <li><strong>Eliminación</strong> — solicitar la eliminación de tu cuenta y datos asociados</li>
+      <li><strong>Portabilidad</strong> — solicitar tus datos en un formato legible</li>
+      <li><strong>Oposición</strong> — oponerte al tratamiento de tus datos en determinadas circunstancias</li>
+    </ul>
+    <p>
+      Para ejercer cualquiera de estos derechos, escríbenos a
+      <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a>.
+      Responderemos en un plazo máximo de 30 días.
+    </p>
+
+    <h2>11. Cambios en esta política</h2>
+    <p>
+      Podemos actualizar esta Política de Privacidad ocasionalmente. Cuando lo hagamos, actualizaremos
+      la fecha de "Última actualización" en la parte superior. Si los cambios son significativos,
+      te notificaremos a través de la App. El uso continuado de la App tras los cambios implica la
+      aceptación de la nueva política.
+    </p>
+
+    <h2>12. Contacto</h2>
+    <div class="highlight">
+      <p>
+        Si tienes preguntas, solicitudes o inquietudes sobre esta Política de Privacidad, puedes
+        contactarnos en:
+      </p>
+      <p style="margin-top:10px">
+        <strong>Correo electrónico:</strong>
+        <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a>
+      </p>
+    </div>
+
+  </div><!-- /es -->
+
+  <!-- ═══════════════════════════════ ENGLISH ═══════════════════════════════ -->
+  <div data-lang="en">
+
+    <div class="policy-meta">
+      <span><strong>Application:</strong> Mikefero App</span>
+      <span><strong>Package:</strong> com.mikefero.defiance</span>
+      <span><strong>Last updated:</strong> May 12, 2026</span>
+      <span><strong>Contact:</strong> <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a></span>
+    </div>
+
+    <h2>1. Introduction</h2>
+    <p>
+      Welcome to <strong>Mikefero App</strong> ("the App", "we", "us"). This Privacy Policy explains
+      what information we collect, how we use it, how we protect it, and what rights you have as a
+      user. By registering and using the App, you agree to the practices described in this document.
+    </p>
+    <p>
+      The App is a management and trading tool for in-game items from the video game <em>DEFIANCE</em>.
+      We are not affiliated with the game's developer.
+    </p>
+
+    <h2>2. Data We Collect</h2>
+
+    <div class="card">
+      <div class="card-title">Data We DO Collect</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Why we collect it</th>
+            <th>Visible to other users?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Email address</strong><br/><span style="color:var(--muted);font-size:12px">@gmail.com only</span></td>
+            <td>Authentication and account recovery</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Username</strong></td>
+            <td>Identify you within the App</td>
+            <td>Yes — shown in store and chats</td>
+          </tr>
+          <tr>
+            <td><strong>Device identifier</strong><br/><span style="color:var(--muted);font-size:12px">ANDROID_ID</span></td>
+            <td>Limit one account per device and prevent fraudulent multi-accounting</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Notification token</strong><br/><span style="color:var(--muted);font-size:12px">FCM Token</span></td>
+            <td>Send you push notifications (raffles, messages, alerts)</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td><strong>Chat messages</strong></td>
+            <td>Enable communication between buyers and sellers</td>
+            <td>Only between chat participants</td>
+          </tr>
+          <tr>
+            <td><strong>In-game item data</strong><br/><span style="color:var(--muted);font-size:12px">Weapons, stats, mods</span></td>
+            <td>Core App functionality (management and marketplace)</td>
+            <td>Yes — when you publish an item to the store</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Data We Do NOT Collect</div>
+      <ul>
+        <li>Geographic location or GPS data</li>
+        <li>Images, video, or audio from your device</li>
+        <li>Biometric data</li>
+        <li>Banking or payment information</li>
+        <li>Device contacts</li>
+        <li>Browsing history or data from other applications</li>
+      </ul>
+    </div>
+
+    <h2>3. How We Use Your Data</h2>
+    <ul>
+      <li>Create and manage your user account</li>
+      <li>Ensure each device has at most one account (anti-fraud security)</li>
+      <li>Display your username in the store and chats</li>
+      <li>Let you publish items and contact other users for trades</li>
+      <li>Send you App-related notifications (raffles, messages, updates)</li>
+      <li>Manage access and apply moderation restrictions if necessary</li>
+    </ul>
+    <p>
+      We do not use your data for advertising, commercial profiling, or sell it to third parties under any circumstances.
+    </p>
+
+    <h2>4. Third-Party Services</h2>
+    <p>
+      The App uses the following <strong>Google / Firebase</strong> services, each with its own
+      privacy policy:
+    </p>
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr><th>Service</th><th>Purpose</th><th>Privacy Policy</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Firebase Authentication</strong></td>
+            <td>Registration and sign-in</td>
+            <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+          </tr>
+          <tr>
+            <td><strong>Firebase Realtime Database</strong></td>
+            <td>Storage of items, profiles, and chats</td>
+            <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+          </tr>
+          <tr>
+            <td><strong>Firebase Cloud Messaging</strong></td>
+            <td>Push notifications</td>
+            <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      All these services are operated by Google LLC and governed by the
+      <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.
+      Data is stored on Google's servers.
+    </p>
+
+    <h2>5. Data Sharing</h2>
+    <p>We do not share your personal data with third parties except in the following cases:</p>
+    <ul>
+      <li><strong>Google / Firebase</strong> — as infrastructure provider (detailed in section 4)</li>
+      <li><strong>Other App users</strong> — only your username and items you voluntarily publish to the store</li>
+      <li><strong>Legal obligations</strong> — if required by a competent authority under applicable law</li>
+    </ul>
+
+    <h2>6. Data Retention</h2>
+    <p>
+      We retain your data for as long as your account is active. If you request account deletion,
+      we will remove your information from Firebase within a reasonable timeframe, unless the law
+      requires us to retain it for a specific period.
+    </p>
+    <p>
+      Chat messages are deleted when any participant closes the chat within the App.
+    </p>
+
+    <h2>7. Security</h2>
+    <p>We implement technical measures to protect your data:</p>
+    <ul>
+      <li>Email authentication with mandatory account verification before first access</li>
+      <li>Firebase Realtime Database security rules restricting access to each resource to its owner</li>
+      <li>APK integrity verification in production builds</li>
+      <li>Minimum version control to enforce security updates</li>
+      <li>Encrypted communications via HTTPS/TLS managed by Firebase</li>
+    </ul>
+    <p>
+      However, no system is 100% secure. We recommend using a strong password and not sharing
+      your credentials with anyone.
+    </p>
+
+    <h2>8. App Permissions</h2>
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr><th>Permission</th><th>Reason</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>INTERNET</code></td>
+            <td>Connect to Firebase to sync data</td>
+          </tr>
+          <tr>
+            <td><code>ACCESS_NETWORK_STATE</code></td>
+            <td>Detect connection status and block offline use</td>
+          </tr>
+          <tr>
+            <td><code>POST_NOTIFICATIONS</code></td>
+            <td>Show push notifications on Android 13 and above</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The App does <strong>not</strong> request access to the camera, microphone, location, contacts, or storage.</p>
+
+    <h2>9. Children's Privacy</h2>
+    <div class="highlight warning">
+      <p>
+        <strong>The App is intended for users aged 13 and older.</strong> We do not knowingly collect
+        personal information from children under 13. If you are a parent or guardian and believe your
+        child has created an account, please contact us at
+        <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a> to have the account and its data
+        promptly deleted.
+      </p>
+    </div>
+    <p>
+      For users between 13 and 17 years old, we recommend that a parent or guardian review this policy
+      before creating an account. The registration process requires an active <em>@gmail.com</em>
+      email address.
+    </p>
+
+    <h2>10. Your Rights</h2>
+    <p>Depending on your jurisdiction, you may have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> — request a copy of the data we hold about you</li>
+      <li><strong>Rectification</strong> — correct your username from within the App's profile screen</li>
+      <li><strong>Erasure</strong> — request deletion of your account and associated data</li>
+      <li><strong>Portability</strong> — request your data in a readable format</li>
+      <li><strong>Objection</strong> — object to the processing of your data in certain circumstances</li>
+    </ul>
+    <p>
+      To exercise any of these rights, write to us at
+      <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a>.
+      We will respond within 30 days.
+    </p>
+
+    <h2>11. Changes to This Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. When we do, we will update the
+      "Last updated" date at the top. If the changes are significant, we will notify you through
+      the App. Continued use of the App after changes constitutes acceptance of the updated policy.
+    </p>
+
+    <h2>12. Contact</h2>
+    <div class="highlight">
+      <p>
+        If you have questions, requests, or concerns about this Privacy Policy, you can reach us at:
+      </p>
+      <p style="margin-top:10px">
+        <strong>Email:</strong>
+        <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a>
+      </p>
+    </div>
+
+  </div><!-- /en -->
+
+</main>
+
+<footer>
+  <p>© 2026 Mikefero App &nbsp;·&nbsp; com.mikefero.defiance &nbsp;·&nbsp; <a href="mailto:mike3jrt@gmail.com">mike3jrt@gmail.com</a></p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('visible', el.dataset.lang === lang);
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().startsWith(lang === 'es' ? 'es' : 'en'));
+    });
+  }
+</script>
+
+</body>
+</html>
